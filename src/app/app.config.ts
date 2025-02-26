@@ -1,5 +1,5 @@
 import { ApplicationConfig, importProvidersFrom, provideZoneChangeDetection } from '@angular/core';
-import { provideRouter, RouterModule } from '@angular/router';
+import { provideRouter, RouterModule, withHashLocation } from '@angular/router';
 import { routes } from './app.routes';
 import { provideClientHydration, withEventReplay } from '@angular/platform-browser';
 import { ReactiveFormsModule } from '@angular/forms';
@@ -18,7 +18,7 @@ export const appConfig: ApplicationConfig = {
       positionClass: 'toast-top-right',
     }),
     provideZoneChangeDetection({ eventCoalescing: true }),
-    provideRouter(routes),
+    provideRouter(routes,withHashLocation()),
     provideClientHydration(withEventReplay()),
     provideHttpClient(withFetch() , withInterceptors([setHeaderInterceptor , errorInterceptor , spinnerInterceptor])),
     importProvidersFrom(RouterModule, BrowserAnimationsModule, ToastrModule.forRoot() , NgxSpinnerModule)
